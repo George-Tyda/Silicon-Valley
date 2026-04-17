@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Propertly.ai</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+
+    :root {
+      --bg: #000000;
+      --panel: #0a0a0a;
+      --panel-2: #111111;
+      --border: #232323;
+      --text: #f5f5f5;
+      --muted: #a3a3a3;
+      --soft: #d4d4d4;
+      --accent: #ffffff;
+      --pill: #171717;
+      --success: #d1fae5;
+      --warning: #fef3c7;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 26px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      border-radius: 10px;
+      background: #050505;
+    }
+
+    .logo-text {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 22px;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover { color: #fff; }
+
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px 40px;
+      text-align: center;
+    }
+
+    .hero-logo {
+      width: 210px;
+      max-width: 50vw;
+      margin: 0 auto 28px;
+      display: block;
+      filter: drop-shadow(0 8px 18px rgba(255,255,255,0.08));
+    }
+
+    .hero h1 {
+      font-size: 2.9rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      max-width: 880px;
+      margin: 0 auto 28px;
+      font-size: 1.25rem;
+      color: var(--muted);
+    }
+
+    .cta-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 34px;
+    }
+
+    .btn {
+      background: var(--pill);
+      border: 1px solid #3a3a3a;
+      padding: 14px 24px;
+      border-radius: 999px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.2s ease;
+    }
+
+    .btn:hover { background: #1c1c1c; }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--soft);
+    }
+
+    .hero-badges {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: #0d0d0d;
+      border: 1px solid #232323;
+      color: var(--muted);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 20px;
+    }
+
+    .demo-shell {
+      background: linear-gradient(180deg, #0c0c0c, #070707);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+    }
+
+    .demo-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .demo-header h2 {
+      font-size: 1.8rem;
+      margin-bottom: 6px;
+    }
+
+    .demo-header p {
+      color: var(--muted);
+    }
+
+    .upload-box {
+      background: #0f0f0f;
+      border: 1px dashed #3b3b3b;
+      border-radius: 18px;
+      padding: 16px;
+      min-width: 290px;
+    }
+
+    .upload-box input { margin-top: 10px; color: var(--soft); }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+    }
+
+    .panel {
+      background: #050505;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+    }
+
+    .panel h3 {
+      margin-bottom: 14px;
+      font-size: 1.2rem;
+    }
+
+    .preview-wrap {
+      height: 390px;
+      border-radius: 18px;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid #1d1d1d;
+    }
+
+    .preview-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .placeholder {
+      color: #7a7a7a;
+      text-align: center;
+      max-width: 280px;
+      padding: 20px;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .score-card {
+      border-radius: 16px;
+      padding: 18px;
+      background: #111;
+      border: 1px solid #202020;
+    }
+
+    .score-card small {
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .score-card h4 {
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .score-card.warning { background: rgba(254,243,199,0.08); border-color: rgba(254,243,199,0.15); }
+    .score-card.success { background: rgba(209,250,229,0.08); border-color: rgba(209,250,229,0.15); }
+
+    .issue-list, .tips-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .issue-item, .tip-item {
+      background: #0d0d0d;
+      border: 1px solid #212121;
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .issue-item strong, .tip-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+
+    .issue-item span, .tip-item span {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .empty-state {
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .cards-3, .cards-4 {
+      display: grid;
+      gap: 18px;
+    }
+
+    .cards-3 { grid-template-columns: repeat(3, 1fr); }
+    .cards-4 { grid-template-columns: repeat(4, 1fr); }
+
+    .feature-card {
+      background: #0a0a0a;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      min-height: 180px;
+    }
+
+    .feature-card h4 {
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+    }
+
+    .feature-card p { color: var(--muted); }
+
+    .mini-label {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: #d4d4d4;
+      background: #141414;
+      border: 1px solid #222;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      background: #0a0a0a;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+    }
+
+    .step .num {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      background: #151515;
+      border: 1px solid #2b2b2b;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .step p { color: var(--muted); }
+
+    .cta-box {
+      background: linear-gradient(180deg, #0d0d0d, #070707);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 34px;
+      text-align: center;
+    }
+
+    .cta-box h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .cta-box p {
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 auto 22px;
+    }
+
+    footer {
+      margin-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      background: #030303;
+      padding: 34px 20px;
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr 1fr;
+      gap: 24px;
+    }
+
+    .footer-col h4 {
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .footer-col p, .footer-col a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.94rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .footer-col a:hover { color: #fff; }
+
+    .footer-brand img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+
+    .hidden { display: none; }
+
+    @media (max-width: 980px) {
+      .demo-grid, .cards-3, .cards-4, .steps, .two-col, .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 { font-size: 2.2rem; }
+      nav { display: none; }
+      .demo-header { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="C:\Users\georg\Downloads\logo-high-res.webp" alt="Propertly.ai logo">
+      <div class="logo-text">propertly.ai</div>
+    </div>
+    <nav>
+      <a href="#demo">Demo</a>
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#footer">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <img class="hero-logo" src="C:\Users\georg\Downloads\logo-high-res.webp" alt="Propertly.ai logo">
+    <h1>Turn listing photos into leads.</h1>
+    <p>AI-powered enhancement that helps homes stand out faster. Detect clutter, relight interiors, improve clarity, and give agents sharper images for stronger property listings.</p>
+    <div class="cta-row">
+      <button class="btn">✨ Sign up to get 3 free credits</button>
+      <button class="btn secondary" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Try the front-page demo</button>
+    </div>
+    <div class="hero-badges">
+      <div class="badge">AI issue detection</div>
+      <div class="badge">Image enhancement</div>
+      <div class="badge">Property-ready presentation</div>
+    </div>
+  </section>
+
+  <section class="section" id="demo">
+    <div class="demo-shell">
+      <div class="demo-header">
+        <div>
+          <h2>Interactive front-page concept</h2>
+          <p>Upload a property photo to preview how Propertly.ai could assess image quality, identify issues, and suggest improvements.</p>
+        </div>
+        <div class="upload-box">
+          <div><strong>Upload a property image</strong></div>
+          <input type="file" id="fileInput" accept="image/*">
+        </div>
+      </div>
+
+      <div class="demo-grid">
+        <div class="panel">
+          <h3>Image preview</h3>
+          <div class="preview-wrap">
+            <div class="placeholder" id="placeholder">Upload a listing image to see a realistic preview and simulate the customer experience.</div>
+            <img id="preview" alt="Property preview">
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>AI assessment</h3>
+          <div id="emptyState" class="empty-state">No image assessed yet. Upload a property photo to generate a simulated review.</div>
+          <div id="results" class="hidden">
+            <div class="score-grid">
+              <div class="score-card warning">
+                <small>Current quality score</small>
+                <h4 id="oldScore">62/100</h4>
+              </div>
+              <div class="score-card success">
+                <small>Enhanced score estimate</small>
+                <h4 id="newScore">86/100</h4>
+              </div>
+            </div>
+
+            <h3 style="margin-top:6px;">Detected issues</h3>
+            <div id="issues" class="issue-list"></div>
+
+            <h3 style="margin-top:18px;">Recommended improvements</h3>
+            <div id="tips" class="tips-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="cards-3">
+      <div class="feature-card">
+        <div class="mini-label">Feature</div>
+        <h4>Automatic enhancement</h4>
+        <p>Improve lighting, sharpness, and overall presentation without needing professional editing skills.</p>
+      </div>
+      <div class="feature-card">
+        <div class="mini-label">Feature</div>
+        <h4>Issue detection</h4>
+        <p>Identify blur, low lighting, clutter, and weak composition before a listing goes live.</p>
+      </div>
+      <div class="feature-card">
+        <div class="mini-label">Feature</div>
+        <h4>Quality scoring</h4>
+        <p>Give agents a simple image score so they can quickly understand how strong a property photo is.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="two-col">
+      <div class="panel">
+        <h3>Why this matters for agents</h3>
+        <div class="issue-list">
+          <div class="issue-item"><strong>More engagement</strong><span>Better property images can increase clicks, interest, and listing visibility.</span></div>
+          <div class="issue-item"><strong>Faster sales</strong><span>Clearer and more attractive listing images help properties make stronger first impressions.</span></div>
+          <div class="issue-item"><strong>Lower editing effort</strong><span>Agents save time by using AI instead of relying only on manual editing tools.</span></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>What makes Propertly.ai different</h3>
+        <div class="issue-list">
+          <div class="issue-item"><strong>Built for property listings</strong><span>The concept focuses specifically on real estate imagery rather than generic photo editing.</span></div>
+          <div class="issue-item"><strong>Detection + enhancement</strong><span>It does not just improve the image; it also explains what is wrong with it.</span></div>
+          <div class="issue-item"><strong>Quick customer value</strong><span>It gives agents instant feedback they can act on before publishing a listing.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how-it-works">
+    <h2 style="font-size:2rem; margin-bottom:18px; text-align:center;">How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h4>Upload</h4>
+        <p>The user uploads a property photo from a phone, tablet, or camera.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h4>Analyse</h4>
+        <p>The AI reviews the image for common visual issues such as blur, dark lighting, and clutter.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h4>Improve</h4>
+        <p>The platform returns a stronger quality estimate and practical suggestions for a better listing result.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="cards-4">
+      <div class="feature-card">
+        <div class="mini-label">Use case</div>
+        <h4>Estate agents</h4>
+        <p>Improve listing quality for client properties and create stronger online first impressions.</p>
+      </div>
+      <div class="feature-card">
+        <div class="mini-label">Use case</div>
+        <h4>Developers</h4>
+        <p>Enhance promotional property images before launch campaigns and digital marketing pushes.</p>
+      </div>
+      <div class="feature-card">
+        <div class="mini-label">Use case</div>
+        <h4>Landlords</h4>
+        <p>Present rental listings more professionally to attract interest faster and reduce poor inquiries.</p>
+      </div>
+      <div class="feature-card">
+        <div class="mini-label">Use case</div>
+        <h4>Property marketers</h4>
+        <p>Use quick AI feedback to streamline image preparation across multiple listings at once.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="cta-box">
+      <h2>Designed to make property marketing simpler</h2>
+      <p>Propertly.ai is built around a simple idea: help property professionals upload an image, understand what is holding it back, and improve it fast enough to support better real-world results.</p>
+      <button class="btn" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Try the demo again</button>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <img src="C:\Users\georg\Downloads\logo-high-res.webp" alt="Propertly.ai logo">
+        <h4>propertly.ai</h4>
+        <p>AI-powered image enhancement and issue detection for property professionals who want better listings and faster results.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="#demo">Demo</a>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+      </div>
+      <div class="footer-col">
+        <h4>Use cases</h4>
+        <p>Estate agencies</p>
+        <p>Landlords</p>
+        <p>Developers</p>
+        <p>Property marketers</p>
+      </div>
+      <div class="footer-col">
+        <h4>Project info</h4>
+        <p>Group: Silicon Valley</p>
+        <p>Module: Pirates Studies</p>
+        <p>Year: 2026</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const input = document.getElementById("fileInput");
+    const preview = document.getElementById("preview");
+    const placeholder = document.getElementById("placeholder");
+    const results = document.getElementById("results");
+    const emptyState = document.getElementById("emptyState");
+    const issuesDiv = document.getElementById("issues");
+    const tipsDiv = document.getElementById("tips");
+    const oldScore = document.getElementById("oldScore");
+    const newScore = document.getElementById("newScore");
+
+    function analyseFileName(name) {
+      const lower = name.toLowerCase();
+
+      if (lower.includes("dark") || lower.includes("dim")) {
+        return {
+          old: 56,
+          improved: 82,
+          issues: [
+            ["Poor lighting", "The image appears too dark and reduces room appeal."],
+            ["Weak contrast", "Important room details are not standing out clearly."]
+          ],
+          tips: [
+            ["Relight automatically", "Increase brightness and rebalance shadows for a clearer interior."],
+            ["Improve warmth", "Adjust tone so the room feels more inviting to viewers."]
+          ]
+        };
+      }
+
+      if (lower.includes("blur") || lower.includes("shaky")) {
+        return {
+          old: 52,
+          improved: 77,
+          issues: [
+            ["Blur detected", "Key furniture and room edges appear soft or unclear."],
+            ["Reduced sharpness", "The image may look less professional in listing results."]
+          ],
+          tips: [
+            ["Sharpen details", "Enhance clarity to improve visible features."],
+            ["Retake suggestion", "Use steadier framing if a clearer source image is available."]
+          ]
+        };
+      }
+
+      if (lower.includes("clutter") || lower.includes("messy")) {
+        return {
+          old: 60,
+          improved: 84,
+          issues: [
+            ["Clutter detected", "Extra objects may distract attention from the room itself."],
+            ["Visual focus reduced", "The eye is pulled away from key selling points."]
+          ],
+          tips: [
+            ["Declutter before listing", "Remove unnecessary items to strengthen composition."],
+            ["Stage key zones", "Keep attention on space, light, and furnishings."]
+          ]
+        };
+      }
+
+      return {
+        old: 64,
+        improved: 87,
+        issues: [
+          ["Minor lighting imbalance", "Some areas could be brighter for a stronger presentation."],
+          ["Presentation improvement possible", "The image is usable, but could be more attractive in search results."]
+        ],
+        tips: [
+          ["Auto-enhance image", "Apply quick AI adjustments for a more polished listing photo."],
+          ["Boost listing quality", "Improve overall presentation before publishing."]
+        ]
+      };
+    }
+
+    input.addEventListener("change", () => {
+      const file = input.files[0];
+      if (!file) return;
+
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = "block";
+      placeholder.style.display = "none";
+
+      const result = analyseFileName(file.name);
+      oldScore.textContent = result.old + "/100";
+      newScore.textContent = result.improved + "/100";
+
+      issuesDiv.innerHTML = "";
+      result.issues.forEach(([title, desc]) => {
+        const item = document.createElement("div");
+        item.className = "issue-item";
+        item.innerHTML = `<strong>${title}</strong><span>${desc}</span>`;
+        issuesDiv.appendChild(item);
+      });
+
+      tipsDiv.innerHTML = "";
+      result.tips.forEach(([title, desc]) => {
+        const item = document.createElement("div");
+        item.className = "tip-item";
+        item.innerHTML = `<strong>${title}</strong><span>${desc}</span>`;
+        tipsDiv.appendChild(item);
+      });
+
+      emptyState.classList.add("hidden");
+      results.classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>
